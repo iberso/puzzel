@@ -6,64 +6,76 @@
 <title>Puzzle Bareng</title>
 <style>
 :root{
-  --bg:#f5f3ef; --bg-glow:#ffffff;
-  --surface:#ffffff; --surface-2:#faf8f5;
-  --text:#211f1c; --muted:#6d6860;
-  --border:#e7e2d9; --border-strong:#d7d0c4;
-  --accent:#378ADD;
-  --ok:#1D9E75; --err:#c0392b;
-  --shadow-1:0 1px 2px rgba(30,24,14,.06),0 1px 3px rgba(30,24,14,.05);
-  --shadow-2:0 12px 26px -16px rgba(30,24,14,.38),0 2px 8px -4px rgba(30,24,14,.12);
+  --bg:#f3f1f8; --bg-glow:#ffffff;
+  --surface:#ffffff; --surface-2:#f7f5fb;
+  --text:#1f1d2b; --muted:#6b6880;
+  --border:#e4e0ee; --border-strong:#d3cde3;
+  --accent:#5b5bd6; --accent-2:#4a4ac4;
+  --ok:#16a37f; --err:#d0453a;
+  --table:#e9e6f3; --dot:rgba(70,60,130,.16);
+  --board:rgba(255,255,255,.72); --boardline:rgba(91,91,214,.35);
+  --hud:rgba(255,255,255,.78);
+  --shadow-1:0 1px 2px rgba(30,20,70,.06),0 1px 3px rgba(30,20,70,.05);
+  --shadow-2:0 18px 40px -22px rgba(30,20,70,.45),0 2px 8px -4px rgba(30,20,70,.12);
 }
 @media(prefers-color-scheme:dark){:root{
-  --bg:#171614; --bg-glow:#242220;
-  --surface:#232120; --surface-2:#1c1b19;
-  --text:#ece9e1; --muted:#a29c92;
-  --border:#332f2b; --border-strong:#443e38;
+  --bg:#14131b; --bg-glow:#23212f;
+  --surface:#1d1c27; --surface-2:#171620;
+  --text:#ecebf5; --muted:#9b98b0;
+  --border:#2e2c3b; --border-strong:#3d3a4f;
+  --accent:#7d7df0; --accent-2:#6a6ae0;
+  --table:#191822; --dot:rgba(255,255,255,.06);
+  --board:rgba(255,255,255,.045); --boardline:rgba(160,160,255,.3);
+  --hud:rgba(29,28,39,.78);
   --shadow-1:0 1px 2px rgba(0,0,0,.5);
-  --shadow-2:0 14px 30px -18px rgba(0,0,0,.9),0 2px 8px -4px rgba(0,0,0,.55);   
+  --shadow-2:0 18px 40px -22px rgba(0,0,0,.9),0 2px 8px -4px rgba(0,0,0,.55);
 }}
 *{box-sizing:border-box}
 body{
   margin:0;color:var(--text);
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   background-color:var(--bg);
-  background-image:radial-gradient(1100px 520px at 50% -12%,var(--bg-glow),transparent 62%);
+  background-image:radial-gradient(1200px 560px at 50% -14%,var(--bg-glow),transparent 62%);
   background-repeat:no-repeat;background-attachment:fixed;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
-main{max-width:1200px;margin:0 auto;padding:14px 16px 22px;display:grid;gap:10px}
+main{max-width:1600px;margin:0 auto;padding:12px 14px 16px;display:grid;gap:10px}
 
 /* Header */
 .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:9px;min-width:0}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
 .logo{
-  width:32px;height:32px;flex:none;border-radius:10px;display:grid;place-items:center;color:#fff;
-  background:linear-gradient(140deg,#5ba2ec,#378ADD 46%,#2b6fb8);
-  box-shadow:0 6px 14px -8px rgba(55,138,221,.85),inset 0 1px 0 rgba(255,255,255,.35);
+  width:34px;height:34px;flex:none;border-radius:11px;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(140deg,#8b8bf5,#5b5bd6 50%,#4339b0);
+  box-shadow:0 8px 16px -8px rgba(91,91,214,.9),inset 0 1px 0 rgba(255,255,255,.35);
 }
-.logo svg{width:18px;height:18px;display:block}
-.brand h1{font-size:15.5px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.1}
+.logo svg{width:19px;height:19px;display:block}
+.brand h1{font-size:16px;font-weight:650;letter-spacing:-.015em;margin:0;line-height:1.1}
+.brand small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;font-weight:400}
 .players{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
 .pl{
-  font-size:11.5px;font-weight:500;padding:3px 9px;border-radius:999px;color:#fff;white-space:nowrap;
+  font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:999px;color:#fff;white-space:nowrap;
   box-shadow:inset 0 -1px 0 rgba(0,0,0,.16),0 1px 2px rgba(0,0,0,.14);
 }
 
-/* Panels */
-.panel{
-  display:flex;flex-wrap:wrap;gap:7px;align-items:center;
-  padding:7px 8px;background:var(--surface);border:1px solid var(--border);
-  border-radius:13px;box-shadow:var(--shadow-1);
+/* Dock */
+.dock{
+  display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;
+  padding:8px 10px;background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;box-shadow:var(--shadow-1);
 }
+.grp{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.tools{margin-left:auto}
+.hostctl{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
 
-/* Controls */
 button,select,input[type=text]{
-  font:inherit;font-size:13px;height:33px;padding:0 11px;border-radius:9px;
+  font:inherit;font-size:13px;height:34px;padding:0 12px;border-radius:10px;
   border:1px solid var(--border-strong);background:var(--surface);color:var(--text);cursor:pointer;
   box-shadow:var(--shadow-1);
   transition:background .16s ease,border-color .16s ease,box-shadow .16s ease,transform .08s ease;
 }
+button{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.ic{width:15px;height:15px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 input[type=text]{cursor:text;width:130px}
 input[type=text]::placeholder{color:var(--muted)}
 select{
@@ -74,48 +86,66 @@ button:not(.primary):hover{background:var(--surface-2);border-color:var(--accent
 button:active{transform:translateY(1px)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 button.primary{
-  color:#fff;font-weight:600;border-color:#2f7dcb;
-  background:linear-gradient(180deg,#4c98e6,#378ADD);
-  box-shadow:0 8px 18px -10px rgba(55,138,221,.9),inset 0 1px 0 rgba(255,255,255,.28);
+  color:#fff;font-weight:600;border-color:var(--accent-2);
+  background:linear-gradient(180deg,#7474ee,var(--accent));
+  box-shadow:0 8px 18px -10px rgba(91,91,214,.9),inset 0 1px 0 rgba(255,255,255,.28);
 }
-button.primary:hover{background:linear-gradient(180deg,#4590dd,#2f7dcb);border-color:#2a72bd}
-.sep{font-size:12px;color:var(--muted);padding:0 2px;align-self:center}
-.panel:has(#create[style*="none"]) .sep{display:none}
+button.primary:hover{background:linear-gradient(180deg,#6a6ae6,var(--accent-2))}
+.sep{font-size:12px;color:var(--muted);padding:0 2px}
+.dock:has(#create[style*="none"]) .sep{display:none}
 
-.stat{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+/* Pemilih emoji */
+.emowrap{position:relative}
+#emo{width:38px;padding:0;justify-content:center;font-size:18px;line-height:1}
+.emopop{
+  position:absolute;top:calc(100% + 6px);left:0;z-index:30;
+  display:grid;grid-template-columns:repeat(7,34px);gap:4px;padding:8px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-2);
+}
+.emopop[hidden]{display:none}
+.emopop button{width:34px;height:34px;padding:0;justify-content:center;font-size:18px;line-height:1;box-shadow:none;border-color:transparent}
+.emopop button.on{border-color:var(--accent);background:var(--surface-2)}
+
 .room{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted)}
 .room:empty{display:none}
 .room b{
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:600;color:var(--text);
-  letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:7px;
+  letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:8px;
   background:var(--surface-2);border:1px solid var(--border);
 }
-.chk{
-  display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 11px;cursor:pointer;user-select:none;
-  font-size:12.5px;color:var(--text);background:var(--surface);
-  border:1px solid var(--border-strong);border-radius:9px;box-shadow:var(--shadow-1);
-  transition:border-color .16s ease,background .16s ease;
-}
-.chk:hover{border-color:var(--accent)}
-.chk input{width:15px;height:15px;margin:0;accent-color:var(--accent);cursor:pointer}
 
 /* Board */
 .board{
-  padding:8px;background:var(--surface);border:1px solid var(--border);
-  border-radius:14px;box-shadow:var(--shadow-2);
+  position:relative;padding:6px;background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;box-shadow:var(--shadow-2);
 }
 #cv{
-  display:block;width:100%;height:340px;border-radius:10px;background:var(--surface-2);
+  display:block;width:100%;height:420px;border-radius:15px;
+  background-color:var(--table);
+  background-image:radial-gradient(var(--dot) 1.2px,transparent 1.7px);
+  background-size:20px 20px;
   box-shadow:inset 0 0 0 1px var(--border);touch-action:none;
 }
-#msg{font-size:12.5px;line-height:1.45;color:var(--muted);margin:9px 4px 1px;min-height:18px}
+.hud{
+  position:absolute;left:18px;top:18px;pointer-events:none;
+  display:flex;flex-direction:column;gap:6px;min-width:150px;
+  padding:8px 12px;border-radius:12px;background:var(--hud);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid var(--border);box-shadow:var(--shadow-1);
+}
+#stat{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.meter{display:block;height:4px;border-radius:99px;background:var(--border);overflow:hidden}
+.meter b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8b8bf5,var(--ok));transition:width .35s ease}
+#msg{font-size:12.5px;line-height:1.45;color:var(--muted);margin:0 4px;min-height:18px;text-align:center}
 
 @media(max-width:640px){
-  main{padding:10px 10px 18px;gap:8px}
+  main{padding:10px 8px 14px;gap:8px}
   .sep{display:none}
   input[type=text]{width:118px}
-  button,select,input[type=text],.chk{height:38px}
-  .stat{margin-left:0;flex-basis:100%;order:9}
+  button,select,input[type=text]{height:38px}
+  #emo{width:42px}
+  .tools{margin-left:0}
+  .hud{left:12px;top:12px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -132,48 +162,58 @@ button.primary:hover{background:linear-gradient(180deg,#4590dd,#2f7dcb);border-c
         <rect x="13" y="13" width="8" height="8" rx="2.2"/>
       </svg>
     </span>
-    <h1>Puzzle Bareng</h1>
+    <h1>Puzzle Bareng<small>Susun puzzle bareng teman, real-time</small></h1>
   </div>
   <div class="players" id="players" aria-label="Pemain di room"></div>
 </header>
 
-<section class="panel">
-  <input type="text" id="name" placeholder="Nama kamu" maxlength="16" aria-label="Nama kamu">
-  <button id="create" class="primary">Buat room</button>
-  <span class="sep" aria-hidden="true">atau</span>
-  <input type="text" id="code" placeholder="Kode room" maxlength="6" style="width:120px" aria-label="Kode room">
-  <button id="join">Gabung</button>
-  <span class="room" id="room"></span>
-  <button id="copy" style="display:none">Salin link</button>
-  <button id="solo" style="display:none">Main sendiri</button>
-</section>
-
-<section class="panel">
-  <span id="hostctl" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
-    <button id="up">Unggah gambar</button>
-    <input type="file" id="file" accept="image/*" hidden>
-    <select id="size" aria-label="Jumlah potongan">
-      <option value="9">9 potongan</option>
-      <option value="16" selected>16 potongan</option>
-      <option value="25">25 potongan</option>
-      <option value="36">36 potongan</option>
-      <option value="49">49 potongan</option>
-      <option value="64">64 potongan</option>
-      <option value="100">100 potongan</option>
-      <option value="150">150 potongan</option>
-      <option value="200">200 potongan</option>
-    </select>
-    <button id="shuf">Acak</button>
-  </span>
-  <button id="snd">Suara: nyala</button>
-  <label class="chk"><input type="checkbox" id="ghost"> Panduan</label>
-  <span class="stat" id="stat"></span>
+<section class="dock">
+  <div class="grp">
+    <span class="emowrap">
+      <button id="emo" type="button" title="Pilih karakter kursormu" aria-label="Pilih karakter kursor" aria-haspopup="true"></button>
+      <div class="emopop" id="emopop" hidden role="menu"></div>
+    </span>
+    <input type="text" id="name" placeholder="Nama kamu" maxlength="16" aria-label="Nama kamu">
+    <button id="create" class="primary">Buat room</button>
+    <span class="sep" aria-hidden="true">atau</span>
+    <input type="text" id="code" placeholder="Kode room" maxlength="6" style="width:120px" aria-label="Kode room">
+    <button id="join">Gabung</button>
+    <span class="room" id="room"></span>
+    <button id="copy" style="display:none"><svg class="ic" viewBox="0 0 24 24"><path d="M9 9h10v10H9zM5 15V5h10"/></svg>Salin link</button>
+    <button id="solo" style="display:none">Main sendiri</button>
+  </div>
+  <div class="grp tools">
+    <span class="hostctl" id="hostctl">
+      <button id="up"><svg class="ic" viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg>Unggah gambar</button>
+      <input type="file" id="file" accept="image/*" hidden>
+      <select id="size" aria-label="Jumlah potongan">
+        <option value="9">9 potongan</option>
+        <option value="16" selected>16 potongan</option>
+        <option value="25">25 potongan</option>
+        <option value="36">36 potongan</option>
+        <option value="49">49 potongan</option>
+        <option value="64">64 potongan</option>
+        <option value="100">100 potongan</option>
+        <option value="150">150 potongan</option>
+        <option value="200">200 potongan</option>
+        <option value="300">300 potongan</option>
+        <option value="400">400 potongan</option>
+        <option value="500">500 potongan</option>
+        <option value="750">750 potongan</option>
+        <option value="1000">1000 potongan</option>
+      </select>
+    </span>
+    <button id="clean" title="Pindahkan semua potongan lepas ke luar kotak"><svg class="ic" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Bersihkan tengah</button>
+    <button id="snd"><svg class="ic" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM15.5 8.5a5 5 0 010 7"/></svg><span id="sndl">Suara: nyala</span></button>
+    <button id="ghost" type="button" title="Arahkan kursor ke sini untuk melihat gambar penuh"><svg class="ic" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Panduan</button>
+  </div>
 </section>
 
 <div class="board">
   <canvas id="cv"></canvas>
-  <p id="msg" role="status"></p>
+  <div class="hud"><span id="stat"></span><i class="meter"><b id="prog"></b></i></div>
 </div>
+<p id="msg" role="status"></p>
 </main>
 
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
@@ -188,30 +228,47 @@ const ICE = null;
 
 const $ = id => document.getElementById(id);
 const cv = $('cv'), ctx = cv.getContext('2d'), hit = document.createElement('canvas').getContext('2d');
-const PREFIX = 'puzzlebareng-v1-';
+const PREFIX = 'puzzlebareng-v2-';
 const COLORS = ['#D85A30','#1D9E75','#7F77DD','#D4537E','#BA7517','#378ADD'];
-const ACC = '#378ADD', FL = 300, SN = 0.28, MX = 0.3, MY = 0.22, D = [[1,0],[-1,0],[0,1],[0,-1]];
+const EMOS = ['🐱','🐶','🦊','🐼','🐸','🐵','🦄','🐙','🐧','🦖','🐰','🐯','🦁','🐨','🐷','🐥','🦉','🐢','👻','🤖','👽','😎','🥳','🔥','⭐','🍕','🍉','🚀'];
+const ACC = '#7d7df0', FL = 300, SN = 0.28, MX = 0.4, MY = 0.45, D = [[1,0],[-1,0],[0,1],[0,-1]];
+// Bentuk dasar tab (disimetris), nanti dimodifikasi acak per sisi
 const K = [[0.38,0],[0.42,0],[0.44,0.04],[0.42,0.10],[0.34,0.20],[0.40,0.28],[0.50,0.28],[0.60,0.28],[0.66,0.20],[0.58,0.10],[0.56,0.04],[0.58,0],[0.62,0]];
-const DEF_MSG = 'Seret potongan ke dekat pasangannya, di dalam atau di luar kotak. Saat ada garis biru, lepas untuk menyambung.';
+const NECK = new Set([2, 3, 9, 10]);
+const DEF_MSG = 'Seret potongan ke dekat pasangannya. Kalau posisinya pas, otomatis menyambung saat dilepas. Arahkan kursor ke tombol "Panduan" untuk mengintip gambar penuh.';
 
 let role = 'host', me = 'host', peer = null, hostConn = null, conns = {}, players = {}, held = {}, cursors = {}, roomCode = '', pendingSync = null;
 let img = null, imgData = '', W = 0, H = 0, dpr = 1, cols = 0, rows = 0, pw = 0, ph = 0, pad = 0, T = 0, bx = 0, by = 0, bw = 0, bh = 0, src = null;
 let pieces = [], groups = [], hT = [], vT = [], nextId = 1;
 let drag = null, cand = null, t0 = 0, el = 0, running = false, done = false, fx = [], anim = null, raf = 0, muted = false, AC = null, lastMv = 0, lastCur = 0;
-let myName = 'Pemain';
-try { myName = localStorage.getItem('pz-name') || 'Pemain'; } catch (e) {}
+let ghostOn = false;
+let myName = 'Pemain', myEmo = '';
+try { myName = localStorage.getItem('pz-name') || 'Pemain'; myEmo = localStorage.getItem('pz-emo') || ''; } catch (e) {}
+if (!EMOS.includes(myEmo)) myEmo = EMOS[Math.floor(Math.random() * EMOS.length)];
 $('name').value = myName === 'Pemain' ? '' : myName;
-players.host = { name: myName, color: COLORS[0] };
+$('emo').textContent = myEmo;
+players.host = { name: myName, color: COLORS[0], emo: myEmo };
+
+// Warna kanvas mengikuti tema (terang/gelap)
+const TH = {};
+function readTheme() {
+  const s = getComputedStyle(document.documentElement), g = n => s.getPropertyValue(n).trim();
+  TH.board = g('--board'); TH.line = g('--boardline'); TH.muted = g('--muted');
+}
+readTheme();
+try { matchMedia('(prefers-color-scheme:dark)').addEventListener('change', () => { readTheme(); kick(); }); } catch (e) {}
 
 // ===== Util =====
 function say(t, kind) { const m = $('msg'); m.textContent = t; m.style.color = kind === 'ok' ? 'var(--ok)' : kind === 'err' ? 'var(--err)' : 'var(--muted)'; }
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+const cleanEmo = e => EMOS.includes(e) ? e : '🙂';
 function fmt(ms) { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
 function curEl() { return running && !done ? Date.now() - t0 : el; }
 function startTimer() { if (!running && !done) { t0 = Date.now() - el; running = true; } }
 function updateStat() {
   const n = pieces.length, pct = n > 1 ? Math.round((n - groups.length) / (n - 1) * 100) : 0;
   $('stat').textContent = pct + '% tersambung · ' + fmt(curEl()) + (peer ? ' · ' + Object.keys(players).length + ' pemain' : '');
+  $('prog').style.width = pct + '%';
 }
 setInterval(updateStat, 1000);
 const bounds = () => ({ x0: -MX * cols, x1: cols + MX * cols - 1, y0: -MY * rows, y1: rows + MY * rows - 1 });
@@ -247,21 +304,51 @@ function prep(source) {
   imgData = c.toDataURL('image/jpeg', 0.85); img = c;
 }
 
-// ===== Bentuk potongan =====
-function edge(P, ax, ay, ex, ey, s) {
-  if (!s) { P.lineTo(ex, ey); return; }
-  const dx = ex - ax, dy = ey - ay, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = uy, ny = -ux;
-  const pt = k => [ax + ux * k[0] * L + nx * k[1] * T * s, ay + uy * k[0] * L + ny * k[1] * T * s];
-  P.lineTo(...pt(K[0]));
-  for (let i = 1; i < 13; i += 3) { const a = pt(K[i]), b = pt(K[i + 1]), c = pt(K[i + 2]); P.bezierCurveTo(a[0], a[1], b[0], b[1], c[0], c[1]); }
-  P.lineTo(ex, ey);
+// ===== Bentuk potongan (unik per sisi, bergelombang) =====
+// Setiap sisi dalam punya parameter sendiri: arah tab (s), posisi (c), lebar (ws), tinggi (hs),
+// kemiringan (sk), leher (nk), dan 4 nilai gelombang di bagian garis lurusnya (w).
+function mkEdge() {
+  const A = 0.06 + Math.random() * 0.08, r = () => (Math.random() * 2 - 1) * A;
+  return {
+    s: Math.random() < 0.5 ? 1 : -1,
+    c: 0.43 + Math.random() * 0.14,
+    ws: 0.85 + Math.random() * 0.4,
+    hs: 0.85 + Math.random() * 0.35,
+    sk: (Math.random() * 2 - 1) * 0.05,
+    nk: 0.75 + Math.random() * 0.35,
+    w: [r(), r(), r(), r()]
+  };
+}
+// Segmen bezier dalam koordinat kanonik: u sepanjang sisi (0..1), v tegak lurus (satuan T)
+function edgeSegs(e) {
+  const tp = i => {
+    const k = K[i]; let du = (k[0] - 0.5) * e.ws; if (NECK.has(i)) du *= e.nk;
+    const h = k[1] / 0.28; return [e.c + du + e.sk * h * h, k[1] * e.hs * e.s];
+  };
+  const u0 = tp(0)[0], u1 = tp(12)[0], segs = [];
+  segs.push([[u0 / 3, e.w[0]], [2 * u0 / 3, e.w[1]], [u0, 0]]);
+  for (let i = 1; i < 13; i += 3) segs.push([tp(i), tp(i + 1), tp(i + 2)]);
+  segs.push([[u1 + (1 - u1) / 3, e.w[2]], [u1 + 2 * (1 - u1) / 3, e.w[3]], [1, 0]]);
+  return segs;
+}
+function addEdge(P, e, ox, oy, hor, rev) {
+  const L = hor ? pw : ph, m = (u, v) => hor ? [ox + u * L, oy + v * T] : [ox + v * T, oy + u * L], sg = edgeSegs(e);
+  if (!rev) {
+    for (const s of sg) { const a = m(s[0][0], s[0][1]), b = m(s[1][0], s[1][1]), c = m(s[2][0], s[2][1]); P.bezierCurveTo(a[0], a[1], b[0], b[1], c[0], c[1]); }
+  } else {
+    for (let i = sg.length - 1; i >= 0; i--) {
+      const s = sg[i], st = i ? sg[i - 1][2] : [0, 0];
+      const a = m(s[1][0], s[1][1]), b = m(s[0][0], s[0][1]), c = m(st[0], st[1]);
+      P.bezierCurveTo(a[0], a[1], b[0], b[1], c[0], c[1]);
+    }
+  }
 }
 function piecePath(r, c) {
   const P = new Path2D(); P.moveTo(0, 0);
-  edge(P, 0, 0, pw, 0, r === 0 ? 0 : -hT[r - 1][c]);
-  edge(P, pw, 0, pw, ph, c === cols - 1 ? 0 : vT[r][c]);
-  edge(P, pw, ph, 0, ph, r === rows - 1 ? 0 : hT[r][c]);
-  edge(P, 0, ph, 0, 0, c === 0 ? 0 : -vT[r][c - 1]);
+  if (r === 0) P.lineTo(pw, 0); else addEdge(P, hT[r - 1][c], 0, 0, true, false);
+  if (c === cols - 1) P.lineTo(pw, ph); else addEdge(P, vT[r][c], pw, 0, false, false);
+  if (r === rows - 1) P.lineTo(0, ph); else addEdge(P, hT[r][c], 0, ph, true, true);
+  if (c === 0) P.lineTo(0, 0); else addEdge(P, vT[r][c - 1], 0, 0, false, true);
   P.closePath(); return P;
 }
 function renderPiece(p) {
@@ -284,27 +371,28 @@ function buildPieces() { pieces = []; for (let r = 0; r < rows; r++) for (let c 
 function layout() {
   if (!img || !cols) return;
   W = cv.getBoundingClientRect().width || 800; dpr = window.devicePixelRatio || 1;
-  const ia = img.width / img.height, fw = 1 + 2 * MX, fh = 1 + 2 * MY, maxH = Math.max(340, Math.min(window.innerHeight - 165, 1040));
+  const ia = img.width / img.height, fw = 1 + 2 * MX, fh = 1 + 2 * MY, maxH = Math.max(420, Math.min(window.innerHeight - 190, 1400));
   bw = Math.min(W / fw, maxH / fh * ia); bh = bw / ia; H = Math.round(bh * fh);
   bx = (W - bw) / 2; by = bh * MY;
   cv.style.height = H + 'px'; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-  pw = bw / cols; ph = bh / rows; T = Math.min(pw, ph); pad = Math.ceil(T * 0.3) + 3;
+  pw = bw / cols; ph = bh / rows; T = Math.min(pw, ph); pad = Math.ceil(T * 0.5) + 3;
   src = document.createElement('canvas'); src.width = Math.round(bw * dpr); src.height = Math.round(bh * dpr);
   src.getContext('2d').drawImage(img, 0, 0, src.width, src.height);
   pieces.forEach(renderPiece);
 }
 function waitView() {
-  W = cv.getBoundingClientRect().width || 800; H = 340; dpr = window.devicePixelRatio || 1;
+  W = cv.getBoundingClientRect().width || 800; H = 420; dpr = window.devicePixelRatio || 1;
   cv.style.height = H + 'px'; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); kick();
 }
 function draw(now) {
   now = now || performance.now();
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
-  if (!src) { ctx.fillStyle = '#888'; ctx.font = '14px system-ui,sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Menunggu puzzle dari host…', W / 2, H / 2); ctx.textAlign = 'left'; return; }
-  ctx.fillStyle = 'rgba(128,128,128,0.12)'; ctx.fillRect(bx, by, bw, bh);
-  if (cand && cand.t === 'board') { ctx.strokeStyle = ACC; ctx.lineWidth = 2.5; ctx.strokeRect(bx + 1, by + 1, bw - 2, bh - 2); }
-  else { ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(128,128,128,0.55)'; ctx.lineWidth = 1; ctx.strokeRect(bx + 0.5, by + 0.5, bw - 1, bh - 1); ctx.setLineDash([]); }
-  if ($('ghost').checked && !done) { ctx.globalAlpha = 0.25; ctx.drawImage(src, bx, by, bw, bh); ctx.globalAlpha = 1; }
+  if (!src) { ctx.fillStyle = TH.muted; ctx.font = '14px system-ui,sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Menunggu puzzle dari host…', W / 2, H / 2); ctx.textAlign = 'left'; return; }
+  // Papan
+  ctx.save(); ctx.shadowColor = 'rgba(20,10,60,0.2)'; ctx.shadowBlur = 22; ctx.shadowOffsetY = 6;
+  ctx.fillStyle = TH.board; ctx.fillRect(bx, by, bw, bh); ctx.restore();
+  ctx.setLineDash([6, 5]); ctx.strokeStyle = TH.line; ctx.lineWidth = 1.2; ctx.strokeRect(bx + 0.5, by + 0.5, bw - 1, bh - 1); ctx.setLineDash([]);
+  if (ghostOn && !done) { ctx.globalAlpha = 0.25; ctx.drawImage(src, bx, by, bw, bh); ctx.globalAlpha = 1; }
   const outline = (g, col) => { ctx.strokeStyle = col; ctx.lineWidth = 2.5; for (const p of g.ps) { const [X, Y] = pxy(p); ctx.save(); ctx.translate(X, Y); ctx.stroke(p.path); ctx.restore(); } };
   for (const g of groups) {
     const lifted = drag && drag.g === g, hb = held[g.id], other = hb && hb !== me && players[hb];
@@ -315,8 +403,7 @@ function draw(now) {
       ctx.drawImage(p.cv, X - pad + l / 2, Y - pad + l, p.cv.width / dpr, p.cv.height / dpr);
       if (fl) { ctx.save(); ctx.translate(X, Y); ctx.fillStyle = 'rgba(255,255,255,' + fl + ')'; ctx.fill(p.path); ctx.restore(); }
     }
-    if (other) outline(g, players[hb].color);
-    if (cand && cand.t === g) outline(g, ACC);
+    if (other) outline(g, players[hb].color); // hanya penanda pemain lain, bukan petunjuk posisi
   }
   fx = fx.filter(f => now - f.t < 450);
   for (const f of fx) {
@@ -327,15 +414,26 @@ function draw(now) {
     for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3 + 0.3, r = 8 + T * 0.7 * k; ctx.beginPath(); ctx.arc(X + Math.cos(a) * r, Y + Math.sin(a) * r, 2 * (1 - k) + 0.5, 0, 7); ctx.fill(); }
   }
   ctx.globalAlpha = 1;
+  // Kursor pemain lain: karakter emoji + nama
   const tnow = Date.now();
   for (const id in cursors) {
     const c = cursors[id], pl = players[id];
     if (id === me || !pl || tnow - c.t > 6000) continue;
     const X = bx + c.x * pw, Y = by + c.y * ph;
-    ctx.fillStyle = pl.color; ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.2;
-    ctx.beginPath(); ctx.moveTo(X, Y); ctx.lineTo(X, Y + 16); ctx.lineTo(X + 4.5, Y + 12); ctx.lineTo(X + 11, Y + 12); ctx.closePath(); ctx.fill(); ctx.stroke();
-    ctx.font = '12px system-ui,sans-serif'; const w = ctx.measureText(pl.name).width;
-    ctx.fillRect(X + 10, Y + 14, w + 10, 18); ctx.fillStyle = '#fff'; ctx.fillText(pl.name, X + 15, Y + 27);
+    ctx.save();
+    ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 6; ctx.shadowOffsetY = 2;
+    ctx.fillStyle = pl.color; ctx.beginPath(); ctx.arc(X, Y, 15, 0, 7); ctx.fill();
+    ctx.shadowColor = 'transparent'; ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.font = '17px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#000';
+    ctx.fillText(cleanEmo(pl.emo), X, Y + 1);
+    ctx.font = '12px system-ui,sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    const w = ctx.measureText(pl.name).width;
+    ctx.fillStyle = pl.color; ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(X + 14, Y + 10, w + 12, 19, 6); else ctx.rect(X + 14, Y + 10, w + 12, 19);
+    ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.fillText(pl.name, X + 20, Y + 23.5);
+    ctx.restore();
   }
 }
 function kick() { if (!raf) raf = requestAnimationFrame(frame); }
@@ -404,7 +502,11 @@ function applySnap(g, s, ev) {
 function doDrop(g) {
   const ev = []; let s, i = 0;
   while ((s = findSnap(g)) && i < 400) { g = applySnap(g, s, ev); i++; }
-  if (i) { g.ps.forEach(renderPiece); groups.splice(groups.indexOf(g), 1); g.locked ? groups.unshift(g) : groups.push(g); }
+  if (i) {
+    // Gambar ulang hanya potongan yang tampilannya berubah (lepas -> tersambung)
+    g.ps.forEach(p => { if (p.j !== !!(p.g.locked || p.g.ps.length > 1)) renderPiece(p); });
+    groups.splice(groups.indexOf(g), 1); g.locked ? groups.unshift(g) : groups.push(g);
+  }
   if (groups.length === 1 && !done) {
     const w = groups[0]; ev.push({ k: 'win', gid: w.id, fx: w.ox, fy: w.oy });
     w.ox = 0; w.oy = 0; w.locked = true; el = curEl(); running = false; done = true;
@@ -437,23 +539,38 @@ function hitTest(x, y) {
   return null;
 }
 
+// ===== Sebar potongan =====
+// Cari posisi (satuan grid) yang sepenuhnya di luar kotak puzzle
+function freeSpot() {
+  const b = bounds();
+  for (let k = 0; k < 200; k++) {
+    const gx = b.x0 + Math.random() * (b.x1 - b.x0), gy = b.y0 + Math.random() * (b.y1 - b.y0);
+    if (gx + 1 <= 0.1 || gx >= cols - 0.1 || gy + 1 <= 0.1 || gy >= rows - 0.1) return [gx, gy];
+  }
+  return [b.x0, b.y0 + Math.random() * (b.y1 - b.y0)];
+}
+// Pindahkan semua potongan yang masih sendirian (belum tersambung ke mana pun) ke luar kotak
+function scatterLoose() {
+  if (!src || done) return 0;
+  let n = 0;
+  for (const g of groups) {
+    if (g.locked || g.ps.length !== 1 || held[g.id]) continue;
+    const p = g.ps[0], s = freeSpot(); g.ox = s[0] - p.c; g.oy = s[1] - p.r; n++;
+  }
+  kick(); return n;
+}
+function pushSync() { broadcast({ t: 'sync', groups: ser(), held, ev: [], el: curEl(), run: running, done }); }
+
 // ===== Game baru (host) =====
 function newGame() {
   const n = +$('size').value, ia = img.width / img.height;
   cols = Math.max(2, Math.round(Math.sqrt(n * ia))); rows = Math.max(2, Math.round(n / cols));
-  const rnd = () => Math.random() < 0.5 ? 1 : -1;
-  hT = Array.from({ length: rows - 1 }, () => Array.from({ length: cols }, rnd));
-  vT = Array.from({ length: rows }, () => Array.from({ length: cols - 1 }, rnd));
+  hT = Array.from({ length: rows - 1 }, () => Array.from({ length: cols }, mkEdge));
+  vT = Array.from({ length: rows }, () => Array.from({ length: cols - 1 }, mkEdge));
   buildPieces(); groups = []; held = {};
-  const b = bounds();
   for (const p of pieces) {
-    let gx = 0, gy = 0;
-    for (let k = 0; k < 60; k++) {
-      gx = b.x0 + Math.random() * (b.x1 - b.x0); gy = b.y0 + Math.random() * (b.y1 - b.y0);
-      const cx = gx + 0.5, cy = gy + 0.5;
-      if (!(cx > -0.3 && cx < cols + 0.3 && cy > -0.3 && cy < rows + 0.3)) break;
-    }
-    const g = { id: nextId++, ps: [p], ox: gx - p.c, oy: gy - p.r, locked: false, flash: 0 }; p.g = g; groups.push(g);
+    const s = freeSpot();
+    const g = { id: nextId++, ps: [p], ox: s[0] - p.c, oy: s[1] - p.r, locked: false, flash: 0 }; p.g = g; groups.push(g);
   }
   for (let i = groups.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [groups[i], groups[j]] = [groups[j], groups[i]]; }
   el = 0; running = false; done = false; anim = null; fx = []; drag = null; cand = null;
@@ -477,7 +594,7 @@ function sendInit(id) {
   c.conn.send({ t: 'init', img: imgData, cols, rows, hT, vT, groups: ser(), held, el: curEl(), run: running, done, you: id, players });
 }
 function renderPlayers() {
-  $('players').innerHTML = peer ? Object.keys(players).map(id => '<span class="pl" style="background:' + players[id].color + '">' + esc(players[id].name) + (id === me ? ' (kamu)' : '') + '</span>').join('') : '';
+  $('players').innerHTML = peer ? Object.keys(players).map(id => '<span class="pl" style="background:' + players[id].color + '">' + esc(cleanEmo(players[id].emo)) + ' ' + esc(players[id].name) + (id === me ? ' (kamu)' : '') + '</span>').join('') : '';
   updateStat();
 }
 function roomLink() { return location.origin + location.pathname + '#' + roomCode; }
@@ -491,6 +608,13 @@ function copyLink() {
   if (navigator.clipboard) navigator.clipboard.writeText(l).then(() => say('Link disalin. Kirim ke temanmu.', 'ok'), () => prompt('Salin link ini:', l));
   else prompt('Salin link ini:', l);
 }
+// Kirim nama + karakter terbaru ke semua pemain
+function sendProfile() {
+  if (players[me]) { players[me].name = myName; players[me].emo = myEmo; }
+  if (role === 'guest') { if (hostConn && hostConn.open) hostConn.send({ t: 'name', name: myName, emo: myEmo }); }
+  else broadcast({ t: 'players', players });
+  renderPlayers(); kick();
+}
 
 function createRoom() {
   if (role === 'guest') return;
@@ -498,7 +622,7 @@ function createRoom() {
   const code = Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
   say('Membuat room…');
   peer = new Peer(PREFIX + code, peerOpts());
-  peer.on('open', () => { players.host.name = myName; showRoom(code); say('Room siap. Klik "Salin link" lalu kirim ke temanmu.', 'ok'); });
+  peer.on('open', () => { players.host.name = myName; players.host.emo = myEmo; showRoom(code); say('Room siap. Klik "Salin link" lalu kirim ke temanmu.', 'ok'); });
   peer.on('connection', acceptConn);
   peer.on('disconnected', () => { try { peer.reconnect(); } catch (e) {} });
   peer.on('error', e => {
@@ -527,10 +651,13 @@ function onHostData(conn, d) {
   const id = conn.peer, pl = conns[id]; if (!pl) return;
   switch (d.t) {
     case 'hello':
-      players[id] = { name: String(d.name || 'Teman').slice(0, 16), color: pl.color };
+      players[id] = { name: String(d.name || 'Teman').slice(0, 16), color: pl.color, emo: cleanEmo(d.emo) };
       sendInit(id); broadcast({ t: 'players', players }); renderPlayers(); say(players[id].name + ' bergabung.', 'ok'); break;
     case 'name':
-      if (players[id]) { players[id].name = String(d.name || 'Teman').slice(0, 16); broadcast({ t: 'players', players }); renderPlayers(); } break;
+      if (players[id]) {
+        players[id].name = String(d.name || 'Teman').slice(0, 16); players[id].emo = cleanEmo(d.emo);
+        broadcast({ t: 'players', players }); renderPlayers(); kick();
+      } break;
     case 'grab': {
       const g = gById(d.gid);
       if (!g || g.locked || (held[d.gid] && held[d.gid] !== id)) { conn.send({ t: 'deny', gid: d.gid }); break; }
@@ -546,6 +673,10 @@ function onHostData(conn, d) {
       g.ox = d.ox; g.oy = d.oy; delete held[d.gid];
       const ev = doDrop(g); playEvents(ev);
       broadcast({ t: 'sync', groups: ser(), held, ev, el: curEl(), run: running, done }); updateStat(); kick(); break;
+    }
+    case 'scatter': {
+      const n = scatterLoose(); pushSync();
+      say((players[id] ? players[id].name : 'Teman') + ' membersihkan tengah (' + n + ' potongan dipindah).'); break;
     }
     case 'cur':
       cursors[id] = { x: d.x, y: d.y, t: Date.now() }; broadcast({ t: 'cur', id, x: d.x, y: d.y }, id); kick(); break;
@@ -563,7 +694,7 @@ function joinRoom(code) {
   peer = new Peer(peerOpts());
   peer.on('open', () => {
     hostConn = peer.connect(PREFIX + code, { reliable: true });
-    hostConn.on('open', () => { hostConn.send({ t: 'hello', name: myName }); showRoom(code); });
+    hostConn.on('open', () => { hostConn.send({ t: 'hello', name: myName, emo: myEmo }); showRoom(code); });
     hostConn.on('data', onGuestData);
     hostConn.on('close', () => { cursors = {}; say('Koneksi ke host terputus. Muat ulang halaman untuk gabung lagi, atau klik "Main sendiri".', 'err'); kick(); });
   });
@@ -645,7 +776,7 @@ cv.addEventListener('pointermove', e => {
   const g = drag.g, p = drag.p, b = bounds();
   let gx = (x - drag.ox - bx) / pw, gy = (y - drag.oy - by) / ph;
   gx = Math.min(Math.max(gx, b.x0 - 0.3), b.x1 + 0.3); gy = Math.min(Math.max(gy, b.y0 - 0.3), b.y1 + 0.3);
-  g.ox = gx - p.c; g.oy = gy - p.r; cand = findSnap(g);
+  g.ox = gx - p.c; g.oy = gy - p.r; // tidak ada highlight petunjuk: pemain harus mencari sendiri
   if (now - lastMv > 33) {
     lastMv = now; const m = { t: 'mv', gid: g.id, ox: g.ox, oy: g.oy };
     if (role === 'guest') sendNet(m); else broadcast({ ...m, by: me });
@@ -668,9 +799,23 @@ $('file').onchange = () => { loadFile($('file').files[0]); $('file').value = '';
 cv.addEventListener('dragover', e => e.preventDefault());
 cv.addEventListener('drop', e => { e.preventDefault(); if (role !== 'guest') loadFile(e.dataTransfer.files[0]); });
 $('size').onchange = () => { if (img) newGame(); };
-$('shuf').onclick = () => { if (img) newGame(); };
-$('snd').onclick = () => { muted = !muted; $('snd').textContent = muted ? 'Suara: mati' : 'Suara: nyala'; if (!muted) { ac(); sfx('pick'); } };
-$('ghost').onchange = kick;
+$('clean').onclick = () => {
+  if (!src || done) return;
+  if (role === 'guest') { sendNet({ t: 'scatter' }); say('Meminta host membersihkan tengah…'); return; }
+  const n = scatterLoose(); if (peer) pushSync();
+  say(n ? n + ' potongan lepas dipindah ke luar kotak. Tengah sudah bersih.' : 'Tidak ada potongan lepas yang bisa dipindah.', n ? 'ok' : undefined);
+};
+$('snd').onclick = () => { muted = !muted; $('sndl').textContent = muted ? 'Suara: mati' : 'Suara: nyala'; if (!muted) { ac(); sfx('pick'); } };
+
+// Panduan: muncul hanya selama kursor di atas tombol (atau ditekan / difokus)
+const gh = $('ghost');
+const setGhost = v => () => { ghostOn = v; kick(); };
+gh.addEventListener('pointerenter', setGhost(true));
+gh.addEventListener('pointerleave', setGhost(false));
+gh.addEventListener('pointercancel', setGhost(false));
+gh.addEventListener('focus', setGhost(true));
+gh.addEventListener('blur', setGhost(false));
+
 $('create').onclick = createRoom;
 $('join').onclick = () => joinRoom($('code').value);
 $('code').onkeydown = e => { if (e.key === 'Enter') joinRoom($('code').value); };
@@ -679,11 +824,23 @@ $('solo').onclick = () => { location.href = location.pathname; };
 $('name').onchange = () => {
   myName = $('name').value.trim().slice(0, 16) || 'Pemain';
   try { localStorage.setItem('pz-name', myName); } catch (e) {}
-  if (players[me]) players[me].name = myName;
-  if (role === 'guest') { if (hostConn && hostConn.open) hostConn.send({ t: 'name', name: myName }); }
-  else broadcast({ t: 'players', players });
-  renderPlayers();
+  sendProfile();
 };
+
+// Pemilih karakter emoji
+const pop = $('emopop');
+pop.innerHTML = EMOS.map(e => '<button type="button" role="menuitem" data-e="' + e + '"' + (e === myEmo ? ' class="on"' : '') + '>' + e + '</button>').join('');
+$('emo').onclick = ev => { ev.stopPropagation(); pop.hidden = !pop.hidden; };
+pop.addEventListener('click', ev => {
+  const b = ev.target.closest('button[data-e]'); if (!b) return;
+  myEmo = b.dataset.e; $('emo').textContent = myEmo;
+  pop.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+  try { localStorage.setItem('pz-emo', myEmo); } catch (e) {}
+  pop.hidden = true; sendProfile();
+});
+document.addEventListener('pointerdown', ev => { if (!pop.hidden && !ev.target.closest('.emowrap')) pop.hidden = true; });
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape') pop.hidden = true; });
+
 window.addEventListener('resize', () => { if (src) layout(); else if (role === 'guest') waitView(); kick(); });
 window.addEventListener('beforeunload', () => { if (peer) peer.destroy(); });
 
